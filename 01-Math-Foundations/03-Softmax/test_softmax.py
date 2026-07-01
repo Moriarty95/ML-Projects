@@ -40,4 +40,13 @@ class TestSoftmax(unittest.TestCase):
         # Test with entirely negative logits
         z = np.array([-3.0, -2.0, -1.0], dtype=np.float64)
         expected = np.array([0.0900, 0.2447, 0.6652])
-        np.testing.assert_array_almost_equal(self.solution.softmax(z), expected, decimal=
+        np.testing.assert_array_almost_equal(self.solution.softmax(z), expected, decimal=4)
+
+    def test_single_element(self):
+        # A single element should always have a 100% probability
+        z = np.array([5.0], dtype=np.float64)
+        expected = np.array([1.0000])
+        np.testing.assert_array_almost_equal(self.solution.softmax(z), expected, decimal=4)
+
+if __name__ == '__main__':
+    unittest.main()
